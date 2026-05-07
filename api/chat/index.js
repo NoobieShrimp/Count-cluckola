@@ -13,9 +13,13 @@ export default async function handler(req, res) {
     }),
   });
 
-  const data = await response.json();
+const data = await response.json();
 
-  res.status(200).json({
-    reply: data.output?.[0]?.content?.[0]?.text || "No response 😆",
-  });
-}
+console.log(data);
+
+const reply =
+  data.output_text ||
+  data.output?.[0]?.content?.[0]?.text ||
+  "No response 😆";
+
+res.status(200).json({ reply });
